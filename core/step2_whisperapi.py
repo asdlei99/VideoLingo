@@ -103,11 +103,11 @@ def transcribe_audio(audio_file: str):
 
     # 保存原始转录文本
     os.makedirs('output/log', exist_ok=True)
-    with open("output/log/raw_transcript.txt", "w") as f:
+    with open("output/log/raw_transcript.txt", "w", encoding="utf-8") as f:
         f.write(transcript.text)
 
     print(f"🎵➡️📝 转录音频为文本完成，识别语言为: {transcript.language}")
-    with open("output/log/transcript_language.json", "w") as f:
+    with open("output/log/transcript_language.json", "w", encoding="utf-8") as f:
         json.dump({"language": transcript.language}, f)
 
     # 处理转录结果
@@ -120,14 +120,14 @@ def transcribe_audio(audio_file: str):
 
     # 💾 将转录结果保存为Excel文件
     excel_path = os.path.join('output/log', "cleaned_chunks.xlsx")
-    df.to_excel(excel_path, index=False)
+    df.to_excel(excel_path, index=False, encoding="utf-8")
     print(f"📊 Excel文件已保存到 {excel_path}")
 
     return df
 
 def get_whisper_language():
     try:
-        with open("output/log/transcript_language.json", "r") as f:
+        with open("output/log/transcript_language.json", "r", encoding="utf-8") as f:
             language = json.load(f)["language"]
         return language
     except:
