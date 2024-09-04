@@ -11,6 +11,8 @@ from core.prompts_storage import get_align_prompt
 # TODO you can modify your own function here
 def calc_len(text: str) -> float:
     from config import TARGET_LANGUAGE
+    # 强制类型转换
+    text = str(text)
     # 🇨🇳 characters are counted as 1, others are counted as 0.75
     if '中文' in TARGET_LANGUAGE or 'cn' in TARGET_LANGUAGE: 
         return sum(1 if ord(char) > 127 else 0.75 for char in text)
